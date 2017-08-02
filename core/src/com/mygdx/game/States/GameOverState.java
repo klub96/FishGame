@@ -1,9 +1,11 @@
 package com.mygdx.game.States;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.FishGameDemo;
 import com.mygdx.game.Sprites.Fish;
@@ -15,17 +17,27 @@ import com.mygdx.game.Sprites.Fish;
 public class GameOverState extends State{
 
     protected Texture gameOver;
+    protected Sprite gameOverSprite;
   //  protected Texture bg;
     protected BitmapFont text;
     protected int finalScore;
+    protected int gameOverImgWidth, gameOverImgHeight;
 
-    protected GameOverState(StatesManager sm, int score) {
+    protected GameOverState(StatesManager sm, int score, OrthographicCamera gameCam) {
         super(sm);
-        gameCam.setToOrtho(false, FishGameDemo.WIDTH/2,FishGameDemo.HEIGHT/2);
+        //gameCam.setToOrtho(false, FishGameDemo.WIDTH/2,FishGameDemo.HEIGHT/2);
+        this.gameCam = gameCam;
         gameOver = new Texture("gameover.png");
+        gameOverSprite = new Sprite(gameOver);
+
        // bg = new Texture("kysen.jpg");
         text = new BitmapFont();
         finalScore = score;
+
+
+        gameOverImgWidth = (int)gameCam.viewportWidth/15;
+        gameOverImgHeight = (int)gameCam.viewportHeight/20;
+        gameOverSprite.setSize(gameOverImgWidth,gameOverImgHeight);
     }
 
     @Override
@@ -43,9 +55,9 @@ public class GameOverState extends State{
     @Override
     protected void render(SpriteBatch sb) {
         sb.begin();
-        sb.draw(gameOver,gameCam.position.x - gameOver.getWidth(), gameCam.position.y - gameOver.getHeight());
+        sb.draw(gameOverSprite,gameCam.position.x - gameOverImgWidth, gameCam.position.y);
         text.setColor(Color.CYAN);
-        text.draw(sb,"Final Score: " + finalScore,gameCam.position.x - 150, gameCam.position.y - (gameOver.getHeight() + 50));
+        text.draw(sb,"Final Score: " + finalScore,gameCam.position.x-50, gameCam.position.y - (gameOver.getHeight() + 50));
         sb.end();
     }
 

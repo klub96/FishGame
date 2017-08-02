@@ -2,6 +2,7 @@ package com.mygdx.game.States;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.Sprites.EnemyFish;
 import com.mygdx.game.Sprites.Fish;
 
 import java.util.Random;
@@ -15,9 +16,10 @@ public class PondState extends LevelState{
     private static final int pondCamWidth = 800;
     private static final int pondCamHeight = 500;
     private static final int fishSizeCap = 75;
+    private static final int fishGap = 75;
 
     protected PondState(StatesManager sm, Fish fish) {
-        super(sm,pondCamWidth,pondCamHeight,Level.POND, 75, fish);
+        super(sm,pondCamWidth,pondCamHeight,Level.POND, fishGap, fish);
        // playMusic();
         setCamSize(pondCamWidth,pondCamHeight);
         setBackgroundImage(bg);
@@ -29,7 +31,21 @@ public class PondState extends LevelState{
     @Override
     public void checkFishSize() {
         if(fish.getFishWidth() > fishSizeCap){
-            sm.set(new LakeState(sm, this.fish));
+            EnemyFish highestFish = findHighestFish();
+            inputEnabled = false;
+            fish.turnOffGravity();
+            for(EnemyFish current : enemyFishes){
+                current.turnOffEnemyMovement();
+            }
+            if(!fishOffScreen){
+                levelOutro(highestFish);
+            }
+            else {
+                //fishInPosition = false;
+                //fish.setFishY(LakeState.lakeCamHeight + fish.getPosition().y);
+                sm.set(new LakeState(sm, this.fish));
+
+            }
         }
     }
 

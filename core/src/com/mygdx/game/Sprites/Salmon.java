@@ -6,12 +6,13 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.Animation.Animation;
 
 /**
- * Created by Caleb on 6/23/2017.
+ * Created by Caleb on 7/26/2017.
  */
 
-public class Salmon extends EnemyFish{
-    private static final int MIN_SIZE = 50;
-    private static final int MAX_SIZE = 100;
+public class Salmon extends EnemyFish {
+
+    private static final int MIN_SIZE = 135;
+    private static final int MAX_SIZE = 200;
 
     public Salmon(int startPos) {
         super(MIN_SIZE, MAX_SIZE, startPos);

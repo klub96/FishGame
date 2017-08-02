@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Animation.Animation;
+import com.mygdx.game.FishGameDemo;
 import com.mygdx.game.States.LevelState;
 
 /**
@@ -14,8 +15,10 @@ import com.mygdx.game.States.LevelState;
 
 public class Fish {
     private Texture fish;
+    private Texture collisionBoxImg;
     private Animation fishAnimation;
     private Sprite fishSprite;
+    private Sprite collisionBoxSprt;
     private Vector3 position;
     private Vector3 velocity;
     private Rectangle collisionBox;
@@ -28,18 +31,24 @@ public class Fish {
     private static int jumpHeight;
    // private static final int MOVEMENT = 100;
 
+    private boolean gravityOn;
+
   //  private float fishRotation = 0;
 
     public Fish(){
+        gravityOn = false;
         fishWidth = 30;
         fishHeight = 25;
-        fish = new Texture("fishy4.png");
+        fish = new Texture("fishy3_fins.png");
         fishAnimation = new Animation(new TextureRegion(fish),3,1f);
         fishSprite = new Sprite(fishAnimation.getFrame());
         fishSprite.setSize(fishWidth,fishHeight);
-        position = new Vector3(fishX,400,0);
+        position = new Vector3(fishX, FishGameDemo.HEIGHT + fish.getHeight(),0);
         velocity = new Vector3(0,0,0);
-        collisionBox = new Rectangle(fishX,400,fishSprite.getWidth(),fishSprite.getHeight());
+        collisionBox = new Rectangle(fishX + fishWidth/5,position.y + fishHeight/8,fishSprite.getWidth() - fishWidth/5,fishSprite.getHeight() - fishHeight/5);
+        collisionBoxImg = new Texture("whiteBackground.png");
+//        collisionBoxSprt = new Sprite(collisionBoxImg);
+//        collisionBoxSprt.setSize(collisionBox.getWidth(),collisionBox.getHeight());
     }
 
     public void updateAnim(float dt){
@@ -47,22 +56,27 @@ public class Fish {
         fishSprite.setRegion(fishAnimation.getFrame());
        // fishRotation += 5;
 
-        if(position.y > 0){
+        if(position.y > 0 && gravityOn){
             velocity.add(0, gravity,0);
         }
 
         velocity.scl(dt);
-        position.add(0, velocity.y, 0);
+        if(gravityOn) {
+            position.add(0, velocity.y, 0);
+        }
 
         if(position.y < 0){
             position.y = 0;
         }
+
+
         if(position.y >= LevelState.camHeight - (fishSprite.getHeight())){
             position.y = LevelState.camHeight - (fishSprite.getHeight());
         }
 
         velocity.scl(1/dt);
-        collisionBox.setPosition(position.x,position.y);
+        collisionBox.setPosition(position.x + fishWidth/5,position.y + fishHeight/8);
+       // collisionBoxSprt.setPosition(collisionBox.getX(),collisionBox.getY());
     }
 
     public void jump(){
@@ -79,7 +93,8 @@ public class Fish {
         fishHeight += height;
        // fishSprite.setScale(2);
         fishSprite.setSize(fishWidth,fishHeight);
-        collisionBox.setSize(fishWidth,fishHeight);
+        collisionBox.setSize(fishWidth - fishWidth/5,fishHeight - fishHeight/5);
+       // collisionBoxSprt.setSize(collisionBox.getWidth(),collisionBox.getHeight());
     }
 
     //public Texture getTexture(){return fish;}
@@ -114,7 +129,27 @@ public class Fish {
         return fishAnimation.getFrame();
     }
 
-//    public float getRotation(){
+    public void addFishY(float fishY){
+        position.add(0,fishY,0);
+    }
+
+    public void setFishY(float fishY){
+        position.set(fishX,fishY,0);
+    }
+
+    public void turnOnGravity(){
+        gravityOn = true;
+    }
+
+    public void turnOffGravity(){
+        gravityOn = false;
+    }
+
+    public Sprite getCollisionBoxSprt() {
+        return collisionBoxSprt;
+    }
+
+    //    public float getRotation(){
 //        return fishRotation;
 //    }
 
