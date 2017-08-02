@@ -144,6 +144,8 @@ public abstract class LevelState extends State{
         sb.begin();
         sb.draw(bg,0,0,camWidth,camHeight);
         sb.draw(fish.getSprite(),fish.getPosition().x, fish.getPosition().y,fish.getSprite().getWidth(),fish.getSprite().getHeight());
+//        sb.draw(fish.getTexture(),fish.getPosition().x, fish.getPosition().y,fish.getPosition().x,fish.getPosition().y,fish.getFishWidth(),fish.getFishHeight(),
+//                1f,1f,fish.getRotation(),false);
         for(EnemyFish current : enemyFishes){
             sb.draw(current.getSprite(),current.getPosition().x,current.getPosition().y,current.getEnemyFishWidth(),current.getEnemyFishHeight());
         }

@@ -28,6 +28,8 @@ public class Fish {
     private static int jumpHeight;
    // private static final int MOVEMENT = 100;
 
+  //  private float fishRotation = 0;
+
     public Fish(){
         fishWidth = 30;
         fishHeight = 25;
@@ -43,6 +45,8 @@ public class Fish {
     public void updateAnim(float dt){
         fishAnimation.update(dt);
         fishSprite.setRegion(fishAnimation.getFrame());
+       // fishRotation += 5;
+
         if(position.y > 0){
             velocity.add(0, gravity,0);
         }
@@ -109,6 +113,10 @@ public class Fish {
     public TextureRegion getTexture(){
         return fishAnimation.getFrame();
     }
+
+//    public float getRotation(){
+//        return fishRotation;
+//    }
 
     public void dispose(){
         //fish.dispose();
