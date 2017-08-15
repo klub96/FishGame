@@ -10,8 +10,8 @@ import com.mygdx.game.Animation.Animation;
  */
 
 public class Trout extends EnemyFish{
-    private static final int MIN_SIZE = 50;
-    private static final int MAX_SIZE = 100;
+    private static final int MIN_SIZE = 40;
+    private static final int MAX_SIZE = 110;
 
     public Trout(int startPos) {
         super(MIN_SIZE, MAX_SIZE, startPos);

@@ -23,22 +23,29 @@ public class Fish {
     private Vector3 velocity;
     private Rectangle collisionBox;
 
+    private static final int originalFishWidth = 60;
+    private static final int originalFishHeight = 55;
     private int fishWidth, fishHeight;
 
     private final int fishX = 150;
+
+    private static int fishWeight;
 
     private static int gravity;
     private static int jumpHeight;
    // private static final int MOVEMENT = 100;
 
     private boolean gravityOn;
+    private boolean collisionOn;
 
   //  private float fishRotation = 0;
 
     public Fish(){
         gravityOn = false;
-        fishWidth = 30;
-        fishHeight = 25;
+        collisionOn = false;
+        fishWidth = originalFishWidth;
+        fishHeight = originalFishHeight;
+        fishWeight = 1;
         fish = new Texture("fishy3_fins.png");
         fishAnimation = new Animation(new TextureRegion(fish),3,1f);
         fishSprite = new Sprite(fishAnimation.getFrame());
@@ -47,6 +54,8 @@ public class Fish {
         velocity = new Vector3(0,0,0);
         collisionBox = new Rectangle(fishX + fishWidth/5,position.y + fishHeight/8,fishSprite.getWidth() - fishWidth/5,fishSprite.getHeight() - fishHeight/5);
         collisionBoxImg = new Texture("whiteBackground.png");
+        gravity = -30;
+        jumpHeight = 700;
 //        collisionBoxSprt = new Sprite(collisionBoxImg);
 //        collisionBoxSprt.setSize(collisionBox.getWidth(),collisionBox.getHeight());
     }
@@ -88,19 +97,27 @@ public class Fish {
         return fishHeight * fishWidth;
     }
 
-    public void increaseFishSize(int width, int height){
+    public void increaseFishSize(int width, int height, int weight){
         fishWidth += width;
         fishHeight += height;
        // fishSprite.setScale(2);
         fishSprite.setSize(fishWidth,fishHeight);
         collisionBox.setSize(fishWidth - fishWidth/5,fishHeight - fishHeight/5);
        // collisionBoxSprt.setSize(collisionBox.getWidth(),collisionBox.getHeight());
+        fishWeight += weight / 5;
     }
 
     //public Texture getTexture(){return fish;}
 
     public int getSize(){
         return fishWidth * fishHeight;
+    }
+
+    public void resetFishSize(){
+        fishWidth = originalFishWidth;
+        fishHeight = originalFishHeight;
+        fishSprite.setSize(fishWidth,fishHeight);
+        collisionBox.setSize(fishWidth - fishWidth/5,fishHeight - fishHeight/5);
     }
 
     public Sprite getSprite(){return fishSprite;}
@@ -145,8 +162,20 @@ public class Fish {
         gravityOn = false;
     }
 
+    public boolean isCollisionOn() {
+        return collisionOn;
+    }
+
+    public void setCollision(boolean collisionStatus){
+        collisionOn = collisionStatus;
+    }
+
     public Sprite getCollisionBoxSprt() {
         return collisionBoxSprt;
+    }
+
+    public int getFishWeight() {
+        return fishWeight;
     }
 
     //    public float getRotation(){

@@ -13,19 +13,13 @@ import java.util.Random;
 
 public class PondState extends LevelState{
     private final Texture bg = new Texture("ocean.png");
-    private static final int pondCamWidth = 800;
-    private static final int pondCamHeight = 500;
-    private static final int fishSizeCap = 75;
-    private static final int fishGap = 75;
+    private static final int fishSizeCap = 150;
+    private static final int fishGap = 150;
 
     protected PondState(StatesManager sm, Fish fish) {
-        super(sm,pondCamWidth,pondCamHeight,Level.POND, fishGap, fish);
+        super(sm, Level.POND, fishGap, fish);
        // playMusic();
-        setCamSize(pondCamWidth,pondCamHeight);
         setBackgroundImage(bg);
-        fish.setGravity(-15);
-        fish.setJumpHeight(350);
-        gameCam.setToOrtho(false, pondCamWidth,pondCamHeight);
     }
 
     @Override

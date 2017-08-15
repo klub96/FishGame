@@ -11,8 +11,8 @@ import com.mygdx.game.Animation.Animation;
 
 public class Salmon extends EnemyFish {
 
-    private static final int MIN_SIZE = 135;
-    private static final int MAX_SIZE = 200;
+    private static final int MIN_SIZE = 45;
+    private static final int MAX_SIZE = 110;
 
     public Salmon(int startPos) {
         super(MIN_SIZE, MAX_SIZE, startPos);

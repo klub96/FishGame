@@ -11,8 +11,8 @@ import com.mygdx.game.Animation.Animation;
 
 public class Sturgeon extends EnemyFish {
 
-    private static final int MIN_SIZE = 180;
-    private static final int MAX_SIZE = 275;
+    private static final int MIN_SIZE = 100;
+    private static final int MAX_SIZE = 210;
 
     public Sturgeon(int startPos) {
         super(MIN_SIZE, MAX_SIZE, startPos);

@@ -24,6 +24,7 @@ public abstract class EnemyFish {
 //    private Sprite collisionBoxSprt;
 
     protected int enemyFishWidth, enemyFishHeight;
+    protected int enemyFishWeight;
     protected final int MAX_SIZE;
     protected final int MIN_SIZE;
     protected int maxHeight;
@@ -45,6 +46,7 @@ public abstract class EnemyFish {
         this.MAX_SIZE = maxSize;
         enemyFishHeight = getRandomNum(MIN_SIZE,MAX_SIZE);
         enemyFishWidth = enemyFishHeight + 5;
+        enemyFishWeight = enemyFishWidth / 10;
         xSpawn = LevelState.camWidth + enemyFishWidth;
         maxHeight = LevelState.camHeight - MAX_SIZE;
         enemyFishY = getRandomNum(75,maxHeight);
@@ -99,6 +101,10 @@ public abstract class EnemyFish {
 
     public int getEnemyFishHeight() {
         return enemyFishHeight;
+    }
+
+    public int getEnemyFishWeight() {
+        return enemyFishWeight;
     }
 
     public int getMaxSize() {

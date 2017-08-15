@@ -11,20 +11,14 @@ import com.mygdx.game.Sprites.Fish;
 
 public class LakeState extends LevelState{
     private final Texture bg = new Texture("lake.png");
-    public static final int lakeCamWidth = 1600;
-    public static final int lakeCamHeight = 1000;
     public static final int fishSizeCap = 200;
     public static final int fishGap = 150;
 
     protected LakeState(StatesManager sm, Fish fish) {
-        super(sm, lakeCamWidth, lakeCamHeight,Level.LAKE, fishGap, fish);
-        setCamSize(lakeCamWidth,lakeCamHeight);
+        super(sm, Level.LAKE, fishGap, fish);
         setBackgroundImage(bg);
         this.fish = fish;
-        fish.setFishY(lakeCamHeight + fish.getFishHeight());
-        fish.setGravity(-30);
-        fish.setJumpHeight(700);
-        gameCam.setToOrtho(false,lakeCamWidth,lakeCamHeight);
+        fish.setFishY(camHeight + fish.getFishHeight());
     }
 
     @Override

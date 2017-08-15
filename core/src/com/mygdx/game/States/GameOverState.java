@@ -11,26 +11,42 @@ import com.mygdx.game.FishGameDemo;
 import com.mygdx.game.Sprites.Fish;
 
 /**
+ * Displays game over screen
  * Created by Caleb on 6/30/2017.
  */
 
 public class GameOverState extends State{
 
+    //Game over button texture and sprite
     protected Texture gameOver;
     protected Sprite gameOverSprite;
+
+
   //  protected Texture bg;
+
+    //Text on the screen
     protected BitmapFont text;
+
+    //Amount of fish eaten
     protected int finalScore;
+
+    //Width and height of game over button
     protected int gameOverImgWidth, gameOverImgHeight;
 
+    /**
+     * Sets gameCam size
+     * @param sm
+     * @param score
+     * @param gameCam
+     */
     protected GameOverState(StatesManager sm, int score, OrthographicCamera gameCam) {
         super(sm);
-        //gameCam.setToOrtho(false, FishGameDemo.WIDTH/2,FishGameDemo.HEIGHT/2);
+        //gameCam.setToOrtho(false,800,500);
         this.gameCam = gameCam;
         gameOver = new Texture("gameover.png");
         gameOverSprite = new Sprite(gameOver);
 
-       // bg = new Texture("kysen.jpg");
+        // bg = new Texture("kysen.jpg");
         text = new BitmapFont();
         finalScore = score;
 

@@ -17,12 +17,22 @@ import com.mygdx.game.Sprites.Fish;
  */
 
 public class StartScreenState extends State{
+    //Background texture
     private Texture bg;
+
+    //Start button texture
     private Texture startBtn;
+
+    //Text on screen
     private BitmapFont titleFont;
+
+    //Width and height of start button
     private float sbWidth = FishGameDemo.WIDTH/10;
     private float sbHeight = FishGameDemo.HEIGHT/10;
 
+    /**
+     * Sets camera width and height, and initializes textures
+     */
     public StartScreenState(StatesManager sm){
         super(sm);
         gameCam.setToOrtho(false, FishGameDemo.WIDTH,FishGameDemo.HEIGHT);
@@ -32,6 +42,9 @@ public class StartScreenState extends State{
         System.out.println("In StartScreenState");
     }
 
+    /**
+     * Checks to see if player is clicking on start button
+     */
     @Override
     protected void handleInput() {
         Rectangle sbBound = new Rectangle(gameCam.position.x - sbWidth/2, gameCam.position.y - sbHeight/2, sbWidth, sbHeight);
@@ -40,11 +53,19 @@ public class StartScreenState extends State{
         }
     }
 
+    /**
+     * Calls handleInput
+     * @param dt
+     */
     @Override
     protected void updateAnim(float dt) {
         handleInput();
     }
 
+    /**
+     * Draws start button, text and background
+     * @param sb
+     */
     @Override
     protected void render(SpriteBatch sb) {
         sb.setProjectionMatrix(gameCam.combined);
@@ -57,9 +78,14 @@ public class StartScreenState extends State{
         sb.end();
     }
 
+    /**
+     * Disposes textures
+     */
     @Override
     protected void dispose() {
         startBtn.dispose();
+        bg.dispose();
+        titleFont.dispose();
         System.out.println("StartScreenState disposed");
     }
 }

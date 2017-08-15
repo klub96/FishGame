@@ -11,8 +11,8 @@ import com.mygdx.game.Animation.Animation;
 
 public class Tadpole extends EnemyFish{
 
-    private static final int MIN_SIZE = 10;
-    private static final int MAX_SIZE = 35;
+    private static final int MIN_SIZE = 40;
+    private static final int MAX_SIZE = 100;
 
     public Tadpole(int startPos){
         super(MIN_SIZE,MAX_SIZE, startPos);

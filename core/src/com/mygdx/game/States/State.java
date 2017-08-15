@@ -6,12 +6,18 @@ import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector3;
 
 /**
+ * Abstract class that creates needed functions for all states
  * Created by Caleb on 6/11/2017.
  */
 
 public abstract class State {
+    //Game camera
     protected OrthographicCamera gameCam;
+
+    //Determines where the mouse is and where it is clicking
     protected Vector3 mouse;
+
+    //States stack
     protected StatesManager sm;
 
     protected State(StatesManager sm){

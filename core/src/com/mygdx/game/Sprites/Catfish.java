@@ -12,7 +12,7 @@ import com.mygdx.game.Animation.Animation;
 public class Catfish extends EnemyFish{
 
     private static final int MIN_SIZE = 95;
-    private static final int MAX_SIZE = 150;
+    private static final int MAX_SIZE = 200;
 
     public Catfish(int startPos) {
         super(MIN_SIZE, MAX_SIZE, startPos);

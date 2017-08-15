@@ -12,8 +12,8 @@ import com.mygdx.game.Animation.Animation;
 
 public class Minot extends EnemyFish{
 
-    private static final int MIN_SIZE = 45;
-    private static final int MAX_SIZE = 75;
+    private static final int MIN_SIZE = 90;
+    private static final int MAX_SIZE = 175;
 
     public Minot(int startPos) {
         super(MIN_SIZE, MAX_SIZE, startPos);
