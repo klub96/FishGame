@@ -87,6 +87,7 @@ public abstract class LevelState extends State{
     private String currentLevelName;
 
     private Ipecac ipecac;
+    private int enemyFishWidthMin;
 
     /**
      * Initializes Level variables including textures and camera size
@@ -120,6 +121,7 @@ public abstract class LevelState extends State{
         fish.resetFishSize();
         healthBar = new Texture("whiteBackground.png");
         ipecac = new Ipecac(FishGameDemo.WIDTH*2);
+        enemyFishWidthMin = 0;
     }
 
     /**
@@ -171,16 +173,19 @@ public abstract class LevelState extends State{
             for(EnemyFish current: enemyFishes){
                 current.setEnemySpeed(-6);
             }
+            enemyFishWidthMin = 40;
         }
         else if(currentLevel.equals(Level.LAKE)){
             for(EnemyFish current: enemyFishes){
                 current.setEnemySpeed(-7);
             }
+            enemyFishWidthMin = 40;
         }
         else if(currentLevel.equals(Level.RIVER)){
             for(EnemyFish current: enemyFishes){
                 current.setEnemySpeed(-9);
             }
+            enemyFishWidthMin = 40;
         }
     }
 
@@ -270,6 +275,9 @@ public abstract class LevelState extends State{
                 }
                 if(ipecac.getCollisionBox().overlaps(fish.getCollisionBox()) && !ipecac.isEmpty()){
                     fish.throwUp();
+                    if(fish.getFishWidth()< enemyFishWidthMin){
+                        gameOver();
+                    }
                     ipecac.setEmpty(true);
                 }
             }
